@@ -134,13 +134,13 @@ http://127.0.0.1:5000
 ```
 
 ## 🖼️ Screenshots
+## Screenshots
 
-Add screenshots of your running application here to demonstrate the user interface and generated image results.
+### Home Page
+![DreamCanvas Home Page](screenshots/home.png)
 
-Suggested screenshots:
-
-- Main interface and prompt input
-- Generated image preview
+### Generated Image
+![AI Generated Image](screenshots/generated-image.png)
 
 ## 🔐 Security
 
