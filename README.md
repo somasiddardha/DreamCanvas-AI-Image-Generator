@@ -1,87 +1,182 @@
-# DreamCanvas — AI Image Generator
+# 🎨 DreamCanvas — AI Image Generator
 
-A local AI image-generation website using Flask, HTML/CSS/JavaScript, and Cloudflare Workers AI with FLUX.1 Schnell.
+A text-to-image AI web application that transforms natural-language prompts into images using **FLUX.1-schnell** through Cloudflare Workers AI.
 
-## Requirements
+DreamCanvas provides a simple, user-friendly interface where users can describe an image, generate it using generative AI, preview the result, and download the generated image.
 
-- Windows 10/11
-- Python 3.10 or newer
-- Internet connection
-- Cloudflare account with Workers AI access and an API token
+## ✨ Features
 
-Cloudflare's free allocation and model availability can change. Check the current Workers AI pricing and model documentation before use.
+- **Text-to-Image Generation:** Create images from text prompts.
+- **Generative AI Integration:** Uses FLUX.1-schnell through Cloudflare Workers AI.
+- **Simple User Interface:** Enter prompts through a clean web interface.
+- **Image Preview:** View generated images in the application.
+- **Image Download:** Download generated images.
+- **Secure Configuration:** Store API credentials in environment variables instead of hardcoding them in source code.
 
-## 1. Create Cloudflare credentials
+## 🛠️ Tech Stack
 
-1. Sign in or create an account at https://dash.cloudflare.com/
-2. Find your Cloudflare Account ID in the dashboard.
-3. Create an API token with permissions that allow Workers AI inference for your account. Use the narrowest permissions Cloudflare offers for your account.
-4. Keep the token private. Do not put it in HTML, JavaScript, screenshots, or public repositories.
+| Technology | Purpose |
+|---|---|
+| Python | Backend programming |
+| Flask | Web application framework |
+| HTML5 | Web page structure |
+| CSS3 | Interface styling |
+| JavaScript | Frontend interactions |
+| Cloudflare Workers AI | AI inference service |
+| FLUX.1-schnell | Text-to-image generation model |
+| Git & GitHub | Version control and project hosting |
 
-Official docs:
-- https://developers.cloudflare.com/workers-ai/
-- https://developers.cloudflare.com/workers-ai/models/flux-1-schnell/
-- https://developers.cloudflare.com/workers-ai/platform/pricing/
-
-## 2. Configure the project
-
-1. Extract the ZIP to a folder such as `C:\Users\YourName\ai_image_generator`.
-2. Open that folder in Visual Studio Code.
-3. Copy `.env.example` and name the copy `.env` (the filename must be exactly `.env`, not `.env.txt`).
-4. Open `.env` and replace the example values with your real Account ID and API token.
-
-Example format (use your own values; these are placeholders):
+## 🏗️ System Architecture
 
 ```text
-CLOUDFLARE_ACCOUNT_ID=put_your_account_id_here
-CLOUDFLARE_API_TOKEN=put_your_secret_token_here
+        User
+         |
+         v
+  Text Prompt Input
+         |
+         v
+ HTML / CSS / JavaScript
+         |
+         v
+     Flask Backend
+         |
+         v
+  Cloudflare Workers AI
+         |
+         v
+   FLUX.1-schnell Model
+         |
+         v
+   Generated Image
+         |
+         v
+  Preview and Download
 ```
 
-Do not add quotes unless your credentials require them. Never send the real values to anyone.
+## 📂 Project Structure
 
-## 3. Install dependencies
+```text
+DreamCanvas-AI-Image-Generator/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+├── .env.example
+│
+├── static/
+│   ├── script.js
+│   └── style.css
+│
+└── templates/
+    └── index.html
+```
 
-In VS Code, choose Terminal → New Terminal. Run:
+## ⚙️ Installation and Setup
+
+### Prerequisites
+
+- Python installed on your computer
+- Git
+- A Cloudflare account with access to Workers AI
+- A Cloudflare API token with the required permissions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/somasiddardha/DreamCanvas-AI-Image-Generator.git
+```
+
+### 2. Open the project folder
+
+```bash
+cd DreamCanvas-AI-Image-Generator
+```
+
+### 3. Create a virtual environment
+
+**Windows PowerShell:**
 
 ```powershell
-py -m venv .venv
+python -m venv .venv
+```
+
+Activate it:
+
+```powershell
 .\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
 ```
 
-If PowerShell blocks activation, use Command Prompt in VS Code instead and run:
+### 4. Install dependencies
 
-```bat
-.venv\Scripts\activate.bat
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+```bash
+python -m pip install -r requirements.txt
 ```
 
-## 4. Start the website
+### 5. Configure environment variables
 
-From the project folder with the virtual environment activated:
+Create a local `.env` file in the project root. Use `.env.example` as a reference for the variable names expected by the application.
 
-```powershell
+Add your own Cloudflare credentials using the exact variable names expected by `app.py`.
+
+**Never commit your real `.env` file or publish your API token.**
+
+### 6. Run the application
+
+```bash
 python app.py
 ```
 
-Open this address in your browser:
+Open the local URL printed in your terminal, typically:
 
+```text
 http://127.0.0.1:5000
+```
 
-Keep the terminal window open while using the site. Press `Ctrl+C` in the terminal to stop the server.
+## 🖼️ Screenshots
 
-## Troubleshooting
+Add screenshots of your running application here to demonstrate the user interface and generated image results.
 
-- **Credentials missing:** Make sure `.env` is beside `app.py` and is named `.env`, not `.env.txt`.
-- **401/403:** Verify the Account ID and token permissions. If a token was exposed, revoke it and create a new one.
-- **429 or quota message:** Wait and retry later; check the Cloudflare dashboard for usage and limits.
-- **Model/API errors:** Check Cloudflare's current FLUX.1 Schnell documentation and Workers AI availability for your account.
-- **No image in response:** The API response format may have changed. Check the current official model/API docs.
+Suggested screenshots:
 
-## Security notes
+- Main interface and prompt input
+- Generated image preview
 
-- The token is read only by Python on the server and is never sent to browser JavaScript.
-- `.env` is excluded by `.gitignore`.
-- This Flask development server is intended for local testing. Do not expose it directly to the public internet. Before deploying publicly, add authentication, rate limiting, abuse protection, and production hosting configuration.
+## 🔐 Security
+
+- Keep API tokens and credentials in a local `.env` file.
+- Exclude `.env` and `.venv/` using `.gitignore`.
+- Use placeholder values in `.env.example`.
+- Never publish API tokens, passwords, or other secrets in source code or screenshots.
+- Rotate any API token that may have been exposed.
+
+## 🎯 Learning Outcomes
+
+This project demonstrates practical experience with:
+
+- Python web application development using Flask
+- Frontend development with HTML, CSS, and JavaScript
+- Integration with a generative AI inference API
+- Environment-based configuration
+- Git and GitHub version control
+- Building a text-to-image AI application
+
+## 🚀 Future Enhancements
+
+- Prompt history and saved generations
+- Additional image-generation settings
+- Multiple image styles and aspect ratios
+- Improved error handling and loading indicators
+- Deployment to a public hosting platform
+
+## 👨‍💻 Author
+
+**Soma Siddardha**
+
+B.Tech — Computer Science and Engineering (AI & ML)
+
+GitHub: [@somasiddardha](https://github.com/somasiddardha)
+
+## 📄 License
+
+No license has been added to this repository yet. Usage and redistribution rights remain subject to applicable law until a license is selected.
